@@ -12,7 +12,7 @@ conectarse.
 import numpy as np
 import matplotlib.pyplot as plt
 import socket
-import threading
+import threadin
 import time
 
 # librerias de los cerebros
@@ -320,8 +320,8 @@ def configurar():
     buf[0] = 12
     for i in range(len(tipo)):
         print("agente " + str(i) + ":")
-        buf[7 + i * 2] = int(teclado(True, "? digite 0-UDP, 1-MLP, 2-Basic, 3-manual: ", 0))
-        buf[8 + i * 2] = int(teclado(True, "? digite cantidad de agentes: ", 0))
+        buf[1 + i * 2] = int(teclado(True, "? digite 0-UDP, 1-MLP, 2-Basic, 3-manual: ", 0))
+        buf[2 + i * 2] = int(teclado(True, "? digite cantidad de agentes: ", 0))
     UDP.sendto(buf, ipport)
 
 def flagsss():
@@ -347,8 +347,8 @@ def demo():
     buf = bytearray(1 + 2 * len(tipo))
     buf[0] = 12
     for i in range(len(tipo)):
-        buf[7 + i * 2] = 0
-        buf[8 + i * 2] = 5
+        buf[1 + i * 2] = 0
+        buf[2 + i * 2] = 5
     buf[12] = 1
     UDP.sendto(buf, ipport)
     buf = bytearray(7)
