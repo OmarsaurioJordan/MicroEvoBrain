@@ -349,7 +349,7 @@ def demo():
     for i in range(len(tipo)):
         buf[1 + i * 2] = 0
         buf[2 + i * 2] = 5
-    buf[12] = 1
+    buf[6] = 1
     UDP.sendto(buf, ipport)
     buf = bytearray(7)
     buf[0] = 21
