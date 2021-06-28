@@ -165,7 +165,7 @@ hacer competiciones, por grupos, universidades, etc, con premios jugoso incluido
 
 ## CREADOR:
 
-Omarsaurio (Omar Jordan Jordan)
+Omwekiatl (Omar Jordan Jordan)
 
 Colombia 2020
 
