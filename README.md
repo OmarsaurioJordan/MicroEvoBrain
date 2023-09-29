@@ -1,169 +1,89 @@
 # MicroEvoBrain:
 
-## DESCRIPCION:
+## DESCRIPTION:
 
-Este proyecto es un simulador evolutivo para competencia de algoritmos de
-inteligencia artificial, el simulador fue hecho en Game Maker Studio, se
-incluye el codigo fuente en la carpeta **"MicroEvo.gmx"**, todos estos archivos
-van incluidos tambien en el ejecutable **"MicroEvoBrain.exe"**.
+This project is an evolutionary simulator for artificial intelligence algorithm competition. The simulator was created in Game Maker Studio, and the source code is included in the "MicroEvo.gmx" folder. All these files are also included in the executable "MicroEvoBrain.exe."
 
-Consta de un mundo virtual 2D con alimento generado al azar, se pueden poner
-muros para complejizar la navegacion, se pueden seleccionar de 1 a 5 especies
-de agentes, diferenciados por color, es decir que cada uno puede tener su propio
-algoritmo de inteligencia artificial.
+It consists of a 2D virtual world with randomly generated food. Walls can be added to complicate navigation. You can select 1 to 5 species of agents, differentiated by color. Each species can have its own artificial intelligence algorithm.
 
-Un agente requiere energia para funcionar y reproducirse, tiene un contador de
-puntos que hacen las veces de fitness, tiene 23 entradas o sensores del medio y
-6 salidas o acciones (caminar, rotar, disparar, donar energia, fecundar huevo,
-gritar); las entradas son de tipo: olor, tacto, oido, vision, rayo de contacto,
-energia de otros y propia, percepcion del tiempo y proximidad a huevo.
+An agent requires energy to function and reproduce. It has a point counter that serves as fitness. There are 23 inputs or sensors from the environment and 6 outputs or actions (walk, rotate, shoot, donate energy, fertilize egg, scream). The inputs include smell, touch, hearing, vision, contact beam, energy from others and oneself, perception of time, and proximity to the egg.
 
-El software de simulacion puede funcionar por si solo, aunque limitadamente,
-consta de un algoritmo experto basico, una red neuronal evolutiva MLP, un modo
-manual para controlar al agente, y el modo UDP que es la estrella del asunto.
+The simulation software can run on its own, although limitedly. It includes a basic expert algorithm, an evolutionary MLP neural network, a manual mode to control the agent, and the UDP mode, which is the main feature.
 
-Resumiendo, el UDP conecta al software de Game Maker con el codigo Python que
-administra los algoritmos de inteligencia artificial externos, este administrador
-figura como **"MicroEvoAdmin.py"**, basicamente GMS envia las entradas del agente, los
-algoritmos externos procesan y envian de vuelta a travez del administrador, las
-salidas que llegan al respectivo agente.
+In summary, UDP connects the Game Maker software with the Python code that manages external artificial intelligence algorithms. This manager is named "MicroEvoAdmin.py". Essentially, Game Maker Studio sends the agent's inputs. External algorithms process these inputs and send back the outputs through the manager, which are then received by the respective agent.
 
-## ARCHIVOS:
+## FILES:
 
-**"MicroEvo.gmx"**:
+1. "MicroEvo.gmx":
+Source code of the simulator created in Game Maker Studio.
 
-codigo fuente del simulador hecho en Game Maker Studio.
+2. "cerebroNeurotico.py":
+General-purpose library for using MLP (Multi-Layer Perceptron) and DMNN (Dendral Morphological Neural Network) neural networks. These networks are fully configurable, exportable, and graphable in 2D. They currently do not have gradient descent algorithms for use but instead use genetic mutation and recombination. You can increase or decrease the number of logical units during training (neurons/layers, dendrites). This is done to compare these two neural network architectures under equal conditions and for unsupervised problems (without patterns).
 
-**"cerebroNeurotico.py"**:
+3. "MicroEvoAdmin.py":
+IA manager for "MicroEvoBrain.exe" or any other software that uses UDP communication. When executed, type the "help" command to get a list of all commands. You will find information about the code, command descriptions, simulator software controls, etc.
 
-libreria creada para proposito general, donde se requiera usar redes neuronales
-MLP (multi layer perceptron) y DMNN (dendral morphologycal neural network), estas
-son totalmente configurables, exportables y graficables en 2D, no tiene aun
-algoritmos de gradiente descendente para su uso, en cambio usan mutacion y
-recombinacion genetica, puediendo aumentar o disminuir el numero de unidades
-logicas durante el entreno (neuronas/capas, dendritas); en parte esto es porque
-se pretende comparar estas dos arquitecturas de redes neuronales en iguales
-condiciones, y para problemas no supervizados (sin patrones ademas).
+4. "brainDMNN1.py", "brainDMNN2.py", "brainMLP1.py", "brainMLP2.py":
+Examples of AI algorithms to be managed by the manager. They all use the "cerebroNeurotico.py" library included here.
 
-**"MicroEvoAdmin.py"**:
+5. "brainOmi1.py":
+Another example of an AI algorithm to be managed by the manager. This algorithm is the same one internally used by the code created in Game Maker, mentioned as the basic expert algorithm.
 
-administrador de IAs para **"MicroEvoBrain.exe"** u otro software que cumpla con la
-comunicacion UDP, estando dentro de la ejecucion de este archivo Python, lance
-el comando "ayuda" para obtener todos los comandos, encontrara alli informacion
-acerca del codigo, descripcion de comandos, controles del software simulador, etc.
+6. "templateAI.py":
+This blank document serves as the foundation for creating your own AI following the rules and protocols written there. Following these guidelines ensures proper connection to the simulator. The document contains all the information regarding the agent's inputs and outputs.
 
-**"brainDMNN1.py"**, **"brainDMNN2.py"**, **"brainMLP1.py"**, **"brainMLP2.py"**:
+7. "testRedes.py":
+Raw test code for the "cerebroNeurotico.py" library. Here, classification problems in txt format can be imported and tested. The code includes internal examples such as gates or handpicked noisy points. This classification software uses most evolutionary functions of the library, demonstrating the capabilities of both types of networks and the viability of solving problems stochastically.
 
-son ejemplos de algoritmo IA para ser manejados por el administrador, estos tienen
-en comun que usan a la libreria **"cerebroNeurotico.py"** aqui contenida.
+8. "mlp_ejemplote.png", "dmnn_ejemplote.png":
+Two images resulting from the "testRedes.py" code, showing the decision surface of both types of networks for a 2D problem with a demanding geometric shape. This problem is included by default in the mentioned code. To view the images, execute the code and enter the "demo" command.
 
-**"brainOmi1.py"**:
+9. "ejemplito.txt", "espiral2.txt", "glass.txt", "iris.txt":
+Datasets to use with "testRedes.py". Iris and glass datasets are classic and represent real-world problems. Ejemplito and espiral2 are synthetic 2D datasets created to push the networks to their limits.
 
-otro ejemplo de algoritmo IA para ser manejado por el administrador, es el mismo
-algoritmo que internamente tiene el codigo hecho en Game Maker y el cual fue
-mencionado como algoritmo experto basico.
+## TEST:
 
-**"templateAI.py"**:
+To test the library, run "testRedes.py" and then enter the command "demo". This will allow you to verify its functionality. You can access all the commands by typing "help".
 
-este documento en blanco, es la base para crear su propia IA, siguiendo las reglas
-ahi escritas, y el protocolo, esto garantizara que se pueda conectar adecuadamente
-a simulador, el documento contiene toda la informacion concerniente a las entradas
-y salidas del agente.
+For the simulation software, follow these steps:
 
-**"testRedes.py"**:
+1. Run "MicroEvoBrain.exe" (or the editable version from GMS). Observe how it functions on its own.
 
-este codigo es una prueba en bruto de la libreria **"cerebroNeurotico.py"**, aqui se
-pueden importar problemas de clasificacion en txt, para ser testeados, tambien
-tiene unos ejemplos internos, como compuertas o puntos con ruido escogidos a dedo,
-este software para clasificacion utiliza la mayoria de funciones evolutivas de
-la libreria, demostrando los alcances de ambos tipos de redes y la viabilidad de
-solucionar problemas estocasticamente.
+2. Execute "MicroEvoAdmin.py" (the order doesn't matter). Enter the command "demo" to verify the joint functionality. You can do this by typing "information" and then "2".
 
-**"mlp_ejemplote.png"**, **"dmnn_ejemplote.png"**:
+3. Finally, type "help" to access all the available commands. Enjoy exploring the various functionalities!
 
-dos imagenes resultado del codigo **"testRedes.py"**, donde se ve como es la
-superficie de decicion de ambos tipos de redes, para un problema 2D pero con forma
-geometrica exigente, este problema por defecto viene en el codigo mencionado, solo
-ejecute el codigo y digite el comando **"demo"**.
+## OPERATION:
 
-**"ejemplito.txt"**, **"espiral2.txt"**, **"glass.txt"**, **"iris.txt"**:
+In the GMS simulation, cycles are performed where each agent senses the environment, executes the AI, and obtains the outputs. These outputs are used to calculate collisions, shots, deaths, and fitness (refer to "EvoPID.exe," another creation by the author).
 
-datasets para usar con **"testRedes.py"**, iris y glass son clasicas y pertenecientes
-a problemas reales, ejeplito y espiral2 son sinteticas y 2D, creadas para exigir
-al maximo a las redes.
+When characters reproduce asexually, an egg with information is created. Upon hatching, it generates the new agent. If the egg is fertilized, reproduction can be sexual if the algorithm supports it.
 
-## PRUEBA:
+During world reset, the best AIs are saved to mentor a new generation.
 
-Para el test de la libreria, ejecute **"testRedes.py"** y luego digite el comando
-**"demo"**, devera verificar el funcionamiento, luego con el comando **"ayuda"** puede
-asceder a todos los comandos.
+The Python administrator receives various commands. The UDP protocol details can be found in the "help.rtf" file inside the GMS folder. If there isn't an associated AI class for the agent's ID, a new one is created. If input data is sent, the administrator creates a thread to execute the AI and return the output.
 
-Para el software de simulacion, que es la leche del asunto, ejecute
-**"MicroEvoBrain.exe"** (o el editable desde GMS), vera como funciona por si solo,
-luego ejecute **"MicroEvoAdmin.py"** (realmente el orden no importa), y digite
-la orden **"demo"** tras lo cual devera verificar el funcionamiento en conjunto,
-puede hacerlo digitando **"informacion"** y luego **"2"**; finalmente digite **"ayuda"** para
-obtener todos los deliciosos comandos.
+The received execution data is queued, and a thread is responsible for traversing the queue to obtain the latest data if it hasn't expired. This thread also checks if an AI has been inactive for a while and doesn't belong to the best group. In such a case, it is removed to free up memory (likely because its agent has died).
 
-## FUNCIONAMIENTO:
+In the case of reproduction, GMS sends the command, and the administrator locates the corresponding AI classes to instruct them on recombination or mutation. Many try statements are used to prevent failures from the code of each AI.
 
-La simulacion GMS hace ciclos donde sensa el medio con cada agente, ejecuta la IA
-y obtiene las salidas, con las que se calcula todo, colisiones, disparos, muerte,
-fitness (ver **"EvoPID.exe"** otra creacion del autor).
+## FUTURE WORK:
 
-Cuando los personajes se reproducen asexualmente, se crea un huevo con la
-informacion, que al momento de eclosionar, generara a el nuevo agente; si el huevo
-es fecundado, la reproduccion podra ser sexual si el algoritmo asi lo soporta.
+The GMS software is complete, but there's room for enhancements, such as adding sounds or additional flags. For example, flags could be added to disable violent shots or add fitness for such actions.
 
-En el momento de resetear el mundo, se guardara a las mejores IAs, para que estas
-desoben a una nueva generacion.
+Nevertheless, both the GMS simulation and the Python administrator are self-sufficient. For instance, a simulation could be created in Godot, which is open-source and supports 3D, to replace GMS. Conversely, a better administrator with a graphical user interface (GUI) could be developed.
 
-El administrador Python recibe diferentes ordenes, el protocolo UDP se puede leer
-en el archivo **"help.rtf"** dentro de la carpeta de GMS, si no existe una clase de
-IA asociada al ID del agente, una nueva es creada, si se envian datos de entrada
-el administrador creara un hilo para ejecutar la IA y devolver la salida.
+Additionally, in Godot, an extra software could be created that allows various human players to have limited visibility of the environment (similar to how an agent sees it) and act within it. This setup would enable the comparison of human brains with neural networks, eliminating the powerful human ability to see the simulation screen when controlling manually. This interaction could also happen via UDP, creating a third independent software. This software might even turn the project into an engaging game, providing better patterns for supervised training.
 
-Los datos recibidos para ejecucion se van encolando y un hilo se encarga de
-recorrer la cola, para obtener los ultimos, si no se han vencido; este hilo
-tambien revisara si una IA lleva tiempo inactiva y no pertenece al grupio de las
-mejores, entonces la eliminara para liberar memoria (seguramente su agente murio).
+The "cerebroNeurotico.py" library (if I can call it that) contains a list of future work and improvements.
 
-En caso de reproduccion, GMS enviara la orden, y el administrador se encargara
-de buscar a las clases IA correspondientes para darles la orden de recombinacion
-o mutacion; se manejan muchas sentencias try para evitar fallos provenientes de
-los codigos de cada IA.
+Lastly, thorough testing should be conducted to identify and correct any errors.
 
-## TRABAJO FUTURO:
+## INTENTION:
 
-El softwar en GMS esta finalizado, quiza se le pueden agregar sonidos o unos
-cuantos flags mas, por ejemplo para desactivar los disparos violentos, o agregar
-fitness a estos.
+What if we challenge our fellow programmers to create the best AI? One that, for instance, creates an internal map of the environment (similar to mobile robotics). Competitions could be organized, involving groups, universities, etc., with juicy prizes included.
 
-Aun asi, tanto la simulacion GMS como el administrador Python son suficientes
-por si solos, es decir, se puede crear una simulacion en Godot, que es software
-libre y soporta 3D, para reemplazar a GMS, asi como por el contrario crear
-un mejor administrador, con GUI por ejemplo.
-
-Hacer en Godot un software extra, que permita a diversos jugadores humanos, ver
-de manera limitada (como veria un agente), el entorno y poder actuar, para asi
-comparar al cerebro humano con las redes neuronales, sin la todopoderosa habilidad
-humana de ver la pantalla de simulacion al manejar manualmente; esto tambien
-seria por UDP, un 3er software independiente, que incluso convierta el proyecto
-en un entretenido juego (y obtener mejores patrones para entrenamiento
-supervizado).
-
-La libreria **"cerebroNeurotico.py"** (ok ni se si le puedo llamar asi), tiene dentro
-una lista de trabajo futuro y mejoras.
-
-Testear todo para buscar y corregir fallos.
-
-## PRETENCION:
-
-Y si retamos a nuestros colegas programadores a hacer la mejor IA? una que por
-ejemplo cree un mapa interno del entorno (como en la robotica movil), se pueden
-hacer competiciones, por grupos, universidades, etc, con premios jugoso incluidos.
-
-## CREADOR:
+## CREATOR:
 
 Omwekiatl (Omar Jordan Jordan)
 
@@ -171,18 +91,12 @@ Colombia 2020
 
 mail: [ojorcio@gmail.com]
 
-devianart: [https://www.deviantart.com/omarsaurus]
+Link: [https://linktr.ee/omwekiatl]
 
-dropbox: [https://www.dropbox.com/sh/plhbo1ornjah8jb/AAAOdaSe5JArLE1XRo--Eh_7a?dl=0]
+Indie game developer in free time, as well as creator of various software. In the link, you'll find my art and other links to my projects (check Dropbox).
 
-Desarrollador de videojuegos indie en tiempo libre, asi como de software variado,
-en el link veras mi arte, asi como otros links a mis proyectos (ver Dropbox)
+I recommend looking for "SoftwareDMNN.exe" to understand DMNN. It's somewhere out there and was my thesis work, so it's well-documented (and with accents), and it's open source.
 
-Recomiendo para entender las DMNN, buscar **"SoftwareDMNN.exe"** que esta por ahi
-en algun lado, fue mi trabajo de tesis, por lo que esta bien documentado (y con
-tildes), y es codigo abierto.
+## LICENSE:
 
-## LICENCIA:
-
-Software finalizado, libre y codigo abierto, puede usarse y modificarse, siempre y
-cuando se conserve atribucion a su creador, *be free honey*.
+The finished software is free and open source. It can be used and modified as long as attribution to the creator is retained. Be free, honey.
